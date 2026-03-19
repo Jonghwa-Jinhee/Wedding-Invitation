@@ -493,7 +493,7 @@ openPhotoModal
     document.body.style.top = '';
     document.body.style.width = '';
   
-    // ⭐ 애니메이션 없이 즉시 이동
+    // ⭐ 핵심: 스무스 스크롤 끄고 이동
     document.documentElement.style.scrollBehavior = 'auto';
     window.scrollTo(0, savedScrollY);
     document.documentElement.style.scrollBehavior = '';
