@@ -506,8 +506,10 @@ a {
 }
 
 .countdown__number {
-  font-family: var(--font-display);
-  font-size: 2rem;
+  /*font-family: var(--font-display);*/
+  font-family: 'MaruBuri';
+  /*font-size: 2rem;*/
+  font-size: 1.7rem;
   font-weight: 300;
   line-height: 1;
   letter-spacing: 2px;
@@ -561,6 +563,7 @@ a {
 }
 
 .greeting__parents .parent-dot {
+  display: none;
   color: var(--color-accent);
   font-size: 0.5rem;
 }
