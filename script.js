@@ -491,8 +491,12 @@ openPhotoModal
   
     document.body.style.position = '';
     document.body.style.top = '';
+    document.body.style.width = '';
   
-    window.scrollTo(0, savedScrollY); // ⭐ 원위치 복구
+    // ⭐ 애니메이션 없이 즉시 이동
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, savedScrollY);
+    document.documentElement.style.scrollBehavior = '';
   }
 
   function showModalImage() {
