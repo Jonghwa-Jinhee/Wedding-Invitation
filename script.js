@@ -471,27 +471,18 @@
   let touchEndX = 0;
   let touchStartY = 0;
   let touchEndY = 0;
-  let savedScrollY = 0;
 
   function openPhotoModal(images, index) {
-    savedScrollY = window.scrollY;
     modalImages = images;
     modalIndex = index;
     showModalImage();
-  
     $('#photoModal').classList.add('is-open');
-  
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${savedScrollY}px`;
+    document.body.classList.add('no-scroll');
   }
 
   function closePhotoModal() {
-   $('#photoModal').classList.remove('is-open');
-
-  document.body.style.position = '';
-  document.body.style.top = '';
-
-  window.scrollTo(0, savedScrollY); // ⭐ 원위치 복구
+    $('#photoModal').classList.remove('is-open');
+    document.body.classList.remove('no-scroll');
   }
 
   function showModalImage() {
