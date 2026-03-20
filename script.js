@@ -9,7 +9,7 @@
   /* ═══════════════════════════════════════════
      Utility Helpers
      ═══════════════════════════════════════════ */
-openPhotoModal
+
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
@@ -474,29 +474,32 @@ openPhotoModal
   let savedScrollY = 0;
 
   function openPhotoModal(images, index) {
-    savedScrollY = window.scrollY; // ⭐ 현재 위치 저장
-  
-    modalImages = images;
-    modalIndex = index;
-    showModalImage();
-  
-    $('#photoModal').classList.add('is-open');
-  
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${savedScrollY}px`;
+	savedScrollY = window.scrollY;
+
+	modalImages = images;
+	modalIndex = index;
+	showModalImage();
+
+	$('#photoModal').classList.add('is-open');
+
+	document.body.style.position = 'fixed';
+	document.body.style.top = `-${savedScrollY}px`;
+	document.body.style.left = '0';
+	document.body.style.right = '0';
+	document.body.style.width = '100%';
   }
-  
+
   function closePhotoModal() {
-    $('#photoModal').classList.remove('is-open');
-  
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-  
-    // ⭐ 핵심: 스무스 스크롤 끄고 이동
-    document.documentElement.style.scrollBehavior = 'auto';
-    window.scrollTo(0, savedScrollY);
-    document.documentElement.style.scrollBehavior = '';
+	$('#photoModal').classList.remove('is-open');
+
+	document.body.style.position = '';
+	document.body.style.top = '';
+	document.body.style.width = '';
+
+	// ⭐ 애니메이션 없이 즉시 이동
+	document.documentElement.style.scrollBehavior = 'auto';
+	window.scrollTo(0, savedScrollY);
+	document.documentElement.style.scrollBehavior = '';
   }
 
   function showModalImage() {
