@@ -11,8 +11,10 @@
     <meta property="og:url" content="https://jonghwa-jinhee.github.io/Wedding-Invitation/">
 	
 	<title>Wedding Invitation</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Gowun+Batang:wght@400;700&family=Great+Vibes&family=Monsieur+La+Doulaise&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
-	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"></script>
 	<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 	<script src="script.js" defer></script>
 </head>
@@ -358,41 +360,5 @@
 		<span class="modal-close">&times;</span>
 		<img class="modal-content" id="modalTargetImg" alt="확대 이미지">
 	</div>
-	
-	<script>
-	  // 1. 카카오 SDK 초기화
-	  Kakao.init('667e934f45f43afe423f69c8bafe48da'); // 예: Kakao.init('1234abcd...');
-
-	  // 2. 카카오톡 공유 실행 함수 (피드형)
-	  function sendKakaoLink() {
-		Kakao.Share.sendDefault({
-		  objectType: 'feed',
-		  content: {
-			title: '이종화 & 배진희 결혼합니다',
-			description: '저희의 소중한 날에 초대합니다.',
-			// ★ 세로형 이미지를 준비해서 해당 URL을 넣어야 합니다 (예: 640px x 960px 이상 권장)
-			imageUrl: 'images/og/img.jpeg', 
-			link: {
-			  mobileWebUrl: 'https://jonghwa-jinhee.github.io/Wedding-Invitation/',
-			  webUrl: 'https://jonghwa-jinhee.github.io/Wedding-Invitation/',
-			},
-			imageWidth: 600, // 세로형 이미지 비율 유지를 위한 설정
-			imageHeight: 900,
-		  },
-		  buttons: [
-			{
-			  title: '청첩장 보기', // 여기에 '자세히 보기' 대신 쓸 텍스트
-			  link: {
-				mobileWebUrl: 'https://jonghwa-jinhee.github.io/Wedding-Invitation/',
-				webUrl: 'https://jonghwa-jinhee.github.io/Wedding-Invitation/',
-			  },
-			},
-		  ],
-		});
-	  }
-
-	  // 3. (임시) 페이지가 로드되자마자 카톡 공유 실행 (실제론 버튼 등에 연결해서 사용)
-	  // window.onload = sendKakaoLink;
-	</script>
 </body>
 </html>
