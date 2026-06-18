@@ -117,7 +117,17 @@ body {
   animation: floatArrow 1.6s ease-in-out infinite; 
 }
 
+#baby {
+    width: 100%;
+    overflow: hidden; /* 영역 밖으로 나가는 부분 숨김 */
+}
 
+#baby img {
+    width: 100%;          /* 가로 폭 100% */
+    height: auto;         /* 비율 유지 */
+    display: block;       /* 하단 여백 제거 */
+    object-fit: cover;    /* 비율을 유지하면서 영역을 꽉 채움 */
+}
 /* ========================================================
    [SECTION] INFO AREA
    ======================================================== */
