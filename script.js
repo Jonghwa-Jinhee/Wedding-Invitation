@@ -73,11 +73,12 @@ window.addEventListener('DOMContentLoaded', () => {
     observer.observe(babySection);
   }
 
-  // 6. [추가] 인트로-베이비 섹션 스크롤 스냅 제어 (웹/모바일 공용)
+  // 6. [추가] 인트로-베이비 섹션 스크롤 제어 (웹/모바일 공용)
   let isScrolling = false;
+
+  // 웹(휠) 이벤트
   window.addEventListener('wheel', (e) => {
     if (isScrolling) return;
-
     const intro = document.getElementById('intro');
     const baby = document.getElementById('baby');
     if (!intro || !baby) return;
@@ -85,16 +86,41 @@ window.addEventListener('DOMContentLoaded', () => {
     const scrollY = window.scrollY;
     const introHeight = intro.offsetHeight;
 
-    // 휠을 내릴 때: 인트로에서 베이비로 이동
     if (e.deltaY > 0 && scrollY < introHeight) {
       e.preventDefault();
       isScrolling = true;
       window.scrollTo({ top: baby.offsetTop, behavior: 'smooth' });
       setTimeout(() => { isScrolling = false; }, 800);
-    } 
-    // 휠을 올릴 때: 베이비에서 인트로로 복귀
-    else if (e.deltaY < 0 && scrollY > 0 && scrollY < introHeight) {
+    } else if (e.deltaY < 0 && scrollY > 0 && scrollY < introHeight) {
       e.preventDefault();
+      isScrolling = true;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => { isScrolling = false; }, 800);
+    }
+  }, { passive: false });
+
+  // 모바일(터치) 이벤트
+  let touchStartY = 0;
+  window.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: false });
+
+  window.addEventListener('touchend', (e) => {
+    if (isScrolling) return;
+    const intro = document.getElementById('intro');
+    const baby = document.getElementById('baby');
+    if (!intro || !baby) return;
+
+    const touchEndY = e.changedTouches[0].clientY;
+    const diff = touchStartY - touchEndY;
+    const scrollY = window.scrollY;
+    const introHeight = intro.offsetHeight;
+
+    if (diff > 50 && scrollY < introHeight) {
+      isScrolling = true;
+      window.scrollTo({ top: baby.offsetTop, behavior: 'smooth' });
+      setTimeout(() => { isScrolling = false; }, 800);
+    } else if (diff < -50 && scrollY > 0 && scrollY < introHeight) {
       isScrolling = true;
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setTimeout(() => { isScrolling = false; }, 800);
