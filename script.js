@@ -36,35 +36,32 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   calculateDDay();
 
-  // 4. 슬라이더/모달 제어
-  const wrapper = document.querySelector('.gallery-slider-wrapper');
-  if (wrapper) { /* 기존 코드 유지 */ }
-
-  // 5. [중요] Baby 섹션 애니메이션 통합 관리
+  // 4. Baby 섹션 애니메이션 관리
   const babySection = document.getElementById('baby');
   if (babySection) {
     const coupleContainer = babySection.querySelector('.couple-container');
     const jonghwaTxt = babySection.querySelector('.jonghwa-txt');
     const jinheeTxt = babySection.querySelector('.jinhee-txt');
 
-    const jonghwaSrc = jonghwaTxt.src;
-    const jinheeSrc = jinheeTxt.src;
+    const jonghwaSrc = jonghwaTxt ? jonghwaTxt.src : '';
+    const jinheeSrc = jinheeTxt ? jinheeTxt.src : '';
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           coupleContainer.classList.add('animate');
-
           setTimeout(() => {
-            jonghwaTxt.style.opacity = '1';
-            jonghwaTxt.src = jonghwaSrc + '?v=' + Date.now();
+            if (jonghwaTxt) {
+              jonghwaTxt.style.opacity = '1';
+              jonghwaTxt.src = jonghwaSrc + '?v=' + Date.now();
+            }
           }, 1500);
-
           setTimeout(() => {
-            jinheeTxt.style.opacity = '1';
-            jinheeTxt.src = jinheeSrc + '?v=' + Date.now();
+            if (jinheeTxt) {
+              jinheeTxt.style.opacity = '1';
+              jinheeTxt.src = jinheeSrc + '?v=' + Date.now();
+            }
           }, 3300);
-
           observer.unobserve(babySection);
         }
       });
@@ -73,10 +70,8 @@ window.addEventListener('DOMContentLoaded', () => {
     observer.observe(babySection);
   }
 
-  // 6. [추가] 인트로-베이비 섹션 스크롤 제어 (웹/모바일 공용)
+  // 5. 인트로-베이비 섹션 스크롤 제어
   let isScrolling = false;
-
-  // 웹(휠) 이벤트
   window.addEventListener('wheel', (e) => {
     if (isScrolling) return;
     const intro = document.getElementById('intro');
@@ -99,7 +94,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: false });
 
-  // 모바일(터치) 이벤트
   let touchStartY = 0;
   window.addEventListener('touchstart', (e) => {
     touchStartY = e.touches[0].clientY;
@@ -128,6 +122,35 @@ window.addEventListener('DOMContentLoaded', () => {
   }, { passive: false });
 });
 
-// [기타 함수들]
-function toggleAccordion(headerElement) { /* 기존 코드 유지 */ }
-function copyAccount(accountNumber) { /* 기존 코드 유지 */ }
+/**
+ * [공통 기능 함수]
+ */
+
+// 1. 아코디언 드롭다운 토글
+function toggleAccordion(headerElement) {
+  const card = headerElement.parentElement;
+  const content = headerElement.nextElementSibling;
+  if (card.classList.contains('is-active')) {
+    card.classList.remove('is-active');
+    content.style.maxHeight = null;
+  } else {
+    card.classList.add('is-active');
+    content.style.maxHeight = content.scrollHeight + "px";
+  }
+}
+
+// 2. 통합 복사 및 토스트 메시지 함수
+function copyAccount(text, message = "복사되었습니다.") {
+  navigator.clipboard.writeText(text).then(() => {
+    const toast = document.getElementById('toastMessage');
+    if (toast) {
+      toast.textContent = message; 
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+  }).catch(err => {
+    console.error('복사 실패:', err);
+  });
+}
