@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // 4. 슬라이더/모달 제어
   const wrapper = document.querySelector('.gallery-slider-wrapper');
-  if (wrapper) { /* 생략(기존 코드 유지) */ }
+  if (wrapper) { /* 기존 코드 유지 */ }
 
   // 5. [중요] Baby 섹션 애니메이션 통합 관리
   const babySection = document.getElementById('baby');
@@ -47,29 +47,24 @@ window.addEventListener('DOMContentLoaded', () => {
     const jonghwaTxt = babySection.querySelector('.jonghwa-txt');
     const jinheeTxt = babySection.querySelector('.jinhee-txt');
 
-    // GIF 경로 저장
     const jonghwaSrc = jonghwaTxt.src;
     const jinheeSrc = jinheeTxt.src;
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // 1. 그룹 애니메이션 시작
           coupleContainer.classList.add('animate');
 
-          // 2. Jonghwa 텍스트: 1.0초 뒤 노출 및 재생
           setTimeout(() => {
             jonghwaTxt.style.opacity = '1';
             jonghwaTxt.src = jonghwaSrc + '?v=' + Date.now();
-          }, 1000);
+          }, 1500);
 
-          // 3. Jinhee 텍스트: Jonghwa 노출(1.0s) + GIF 재생시간(1.8s) = 총 2.8초 뒤 노출
           setTimeout(() => {
             jinheeTxt.style.opacity = '1';
             jinheeTxt.src = jinheeSrc + '?v=' + Date.now();
-          }, 2800);
+          }, 3300);
 
-          // 관찰 중단
           observer.unobserve(babySection);
         }
       });
@@ -77,6 +72,34 @@ window.addEventListener('DOMContentLoaded', () => {
 
     observer.observe(babySection);
   }
+
+  // 6. [추가] 인트로-베이비 섹션 스크롤 스냅 제어 (웹/모바일 공용)
+  let isScrolling = false;
+  window.addEventListener('wheel', (e) => {
+    if (isScrolling) return;
+
+    const intro = document.getElementById('intro');
+    const baby = document.getElementById('baby');
+    if (!intro || !baby) return;
+
+    const scrollY = window.scrollY;
+    const introHeight = intro.offsetHeight;
+
+    // 휠을 내릴 때: 인트로에서 베이비로 이동
+    if (e.deltaY > 0 && scrollY < introHeight) {
+      e.preventDefault();
+      isScrolling = true;
+      window.scrollTo({ top: baby.offsetTop, behavior: 'smooth' });
+      setTimeout(() => { isScrolling = false; }, 800);
+    } 
+    // 휠을 올릴 때: 베이비에서 인트로로 복귀
+    else if (e.deltaY < 0 && scrollY > 0 && scrollY < introHeight) {
+      e.preventDefault();
+      isScrolling = true;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => { isScrolling = false; }, 800);
+    }
+  }, { passive: false });
 });
 
 // [기타 함수들]
