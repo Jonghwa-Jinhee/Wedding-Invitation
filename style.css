@@ -18,8 +18,7 @@ body {
   margin: 0 auto;         
   background-color: #fbfaf7; 
   position: relative;
-  overflow-x: hidden;
-  scroll-snap-type: y mandatory;
+  overflow-x: hidden;     
 }
 
 /* ========================================================
@@ -118,7 +117,7 @@ body {
   animation: floatArrow 1.6s ease-in-out infinite; 
 }
 
-#baby{position:relative;background:url('images/baby/bg.jpg') center 27% no-repeat;overflow:hidden;scroll-snap-align:start}
+#baby{position:relative;background:url('images/baby/bg.jpg') center 27% no-repeat;overflow:hidden}
 #baby .baby-wrapper{padding-bottom:70%}
 #baby .baby-wrapper .baby-content{}
 #baby .baby-wrapper .baby-content .twinkle{position:absolute}
