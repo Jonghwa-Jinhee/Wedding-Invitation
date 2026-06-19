@@ -117,17 +117,21 @@ body {
   animation: floatArrow 1.6s ease-in-out infinite; 
 }
 
-#baby {
-    width: 100%;
-    overflow: hidden; /* 영역 밖으로 나가는 부분 숨김 */
-}
+#baby{position:relative;background:url('images/baby/bg.jpg') center 27% no-repeat}
+#baby .baby-wrapper{padding-bottom:70%}
+#baby .baby-wrapper .baby-content{}
+#baby .baby-wrapper .baby-content .twinkle{position:absolute}
+#baby .baby-wrapper .baby-content .twinkle.left{width:23%;left:5px;bottom:10px}
+#baby .baby-wrapper .baby-content .twinkle.right{width:25%;right:0;bottom:15px}
+#baby .baby-wrapper .baby-content .couple-container{}
+#baby .baby-wrapper .baby-content .couple-container .couple-item{}
+#baby .baby-wrapper .baby-content .couple-container .couple-item.jonghwa .heart{position:absolute;right:50%;bottom:20%;width:30%}
+#baby .baby-wrapper .baby-content .couple-container .couple-item.jonghwa .person{position:absolute;right:calc( 50% - 25px );bottom:0;z-index:2;width:30%}
+#baby .baby-wrapper .baby-content .couple-container .couple-item.jonghwa .txt{position:absolute;left:10%;top:30%;width:15%}
+#baby .baby-wrapper .baby-content .couple-container .couple-item.jinhee .heart{position:absolute;left:50%;bottom:20%;width:30%}
+#baby .baby-wrapper .baby-content .couple-container .couple-item.jinhee .person{position:absolute;left:calc( 50% - 15px );bottom:0;width:30%}
+#baby .baby-wrapper .baby-content .couple-container .couple-item.jinhee .txt{position:absolute;right:9%;top:44%;width:11%}
 
-#baby img {
-    width: 100%;          /* 가로 폭 100% */
-    height: auto;         /* 비율 유지 */
-    display: block;       /* 하단 여백 제거 */
-    object-fit: cover;    /* 비율을 유지하면서 영역을 꽉 채움 */
-}
 /* ========================================================
    [SECTION] INFO AREA
    ======================================================== */
