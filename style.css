@@ -117,27 +117,33 @@ body {
   animation: floatArrow 1.6s ease-in-out infinite; 
 }
 
-#baby{position:relative;background:url('images/baby/bg.jpg') center 27% no-repeat}
+#baby{position:relative;background:url('images/baby/bg.jpg') center 27% no-repeat;overflow:hidden}
 #baby .baby-wrapper{padding-bottom:70%}
 #baby .baby-wrapper .baby-content{}
 #baby .baby-wrapper .baby-content .twinkle{position:absolute}
 #baby .baby-wrapper .baby-content .twinkle.left{width:23%;left:5px;bottom:10px}
 #baby .baby-wrapper .baby-content .twinkle.right{width:25%;right:0;bottom:15px}
-#baby .baby-wrapper .baby-content .couple-container{}
+#baby .baby-wrapper .baby-content .couple-container{position:absolute;bottom:0;width:100%;opacity:0}
+#baby .baby-wrapper .baby-content .couple-container.animate {animation: babySlideUp 1.5s steps(5) forwards}
 #baby .baby-wrapper .baby-content .couple-container .couple-item{}
-#baby .baby-wrapper .baby-content .couple-container .couple-item.jonghwa .heart{position:absolute;right:50%;bottom:20%;width:30%}
+#baby .baby-wrapper .baby-content .couple-container .couple-item.jonghwa .heart{position:absolute;right:50%;bottom:60px;width:30%}
 #baby .baby-wrapper .baby-content .couple-container .couple-item.jonghwa .person{position:absolute;right:calc( 50% - 25px );bottom:0;z-index:2;width:30%}
-#baby .baby-wrapper .baby-content .couple-container .couple-item.jonghwa .txt{position:absolute;left:10%;top:30%;width:15%}
-#baby .baby-wrapper .baby-content .couple-container .couple-item.jinhee .heart{position:absolute;left:50%;bottom:20%;width:30%}
+#baby .baby-wrapper .baby-content .couple-container .couple-item.jinhee .heart{position:absolute;left:50%;bottom:60px;width:30%}
 #baby .baby-wrapper .baby-content .couple-container .couple-item.jinhee .person{position:absolute;left:calc( 50% - 15px );bottom:0;width:30%}
-#baby .baby-wrapper .baby-content .couple-container .couple-item.jinhee .txt{position:absolute;right:9%;top:44%;width:11%}
+#baby .baby-wrapper .baby-content .jonghwa-txt{position:absolute;left:10%;top:30%;width:15%;opacity:0;transition:opacity 0.5s ease-in}
+#baby .baby-wrapper .baby-content .jinhee-txt{position:absolute;right:9%;top:44%;width:11%;opacity:0;transition:opacity 0.5s ease-in}
+
+@keyframes babySlideUp {
+    0% { opacity: 0; bottom: -50px; }
+    100% { opacity: 1; bottom: 0; }
+}
 
 /* ========================================================
    [SECTION] INFO AREA
    ======================================================== */
 #info {
   width: 100%;
-  padding: 100px 0 0 0; 
+  padding: 70px 0 0 0; 
   background-color: #fbfaf7;
   display: flex;
   flex-direction: column;
@@ -150,7 +156,7 @@ body {
 
 .invitation-text-box {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .invitation-text-box h2 {
