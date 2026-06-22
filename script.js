@@ -70,7 +70,34 @@ window.addEventListener('DOMContentLoaded', () => {
     observer.observe(babySection);
   }
 
-  // 5. 인트로-베이비 섹션 스크롤 제어
+  // 5. [추가] 갤러리 모달 기능 구현
+  const modal = document.getElementById('galleryModal');
+  const modalImg = document.getElementById('modalTargetImg');
+  const modalClose = document.querySelector('.modal-close');
+  
+  // 모든 갤러리 이미지 클릭 이벤트
+  document.querySelectorAll('.img-box img, .slide-item img').forEach(img => {
+    img.addEventListener('click', (e) => {
+      modal.style.display = 'flex';
+      modalImg.src = e.target.src;
+    });
+  });
+
+  // 닫기 버튼 클릭
+  if (modalClose) {
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  }
+
+  // 모달 배경 클릭 시 닫기
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+
+  // 6. 인트로-베이비 섹션 스크롤 제어
   let isScrolling = false;
   window.addEventListener('wheel', (e) => {
     if (isScrolling) return;
