@@ -36,7 +36,52 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   calculateDDay();
 
-  // 4. Baby 섹션 애니메이션 관리
+  // 4. [중요] 갤러리 모달 및 스와이프 기능
+  const modal = document.getElementById('galleryModal');
+  const modalImg = document.getElementById('modalTargetImg');
+  const modalClose = document.querySelector('.modal-close');
+  
+  // 갤러리 이미지 목록 추출 (모든 이미지 대상)
+  const galleryImages = Array.from(document.querySelectorAll('.img-box img, .slide-item img'));
+  let currentIndex = 0;
+
+  // 모달 열기 함수
+  const openModal = (index) => {
+    currentIndex = index;
+    modalImg.src = galleryImages[currentIndex].src;
+    modal.style.display = 'flex';
+  };
+
+  // 이미지 클릭 시 모달 오픈
+  galleryImages.forEach((img, index) => {
+    img.addEventListener('click', () => openModal(index));
+  });
+
+  // 닫기
+  if (modalClose) modalClose.addEventListener('click', () => modal.style.display = 'none');
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+
+  // 스와이프 로직
+  let touchStartX = 0;
+  modal.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  modal.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+
+    if (Math.abs(diff) > 50) { // 50px 이상 이동 시 스와이프 감지
+      if (diff > 0) { // 왼쪽으로 스와이프 -> 다음 사진
+        currentIndex = (currentIndex + 1) % galleryImages.length;
+      } else { // 오른쪽으로 스와이프 -> 이전 사진
+        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      }
+      modalImg.src = galleryImages[currentIndex].src;
+    }
+  }, { passive: true });
+
+  // 5. Baby 섹션 애니메이션 관리
   const babySection = document.getElementById('baby');
   if (babySection) {
     const coupleContainer = babySection.querySelector('.couple-container');
@@ -51,53 +96,19 @@ window.addEventListener('DOMContentLoaded', () => {
         if (entry.isIntersecting) {
           coupleContainer.classList.add('animate');
           setTimeout(() => {
-            if (jonghwaTxt) {
-              jonghwaTxt.style.opacity = '1';
-              jonghwaTxt.src = jonghwaSrc + '?v=' + Date.now();
-            }
+            if (jonghwaTxt) { jonghwaTxt.style.opacity = '1'; jonghwaTxt.src = jonghwaSrc + '?v=' + Date.now(); }
           }, 1500);
           setTimeout(() => {
-            if (jinheeTxt) {
-              jinheeTxt.style.opacity = '1';
-              jinheeTxt.src = jinheeSrc + '?v=' + Date.now();
-            }
+            if (jinheeTxt) { jinheeTxt.style.opacity = '1'; jinheeTxt.src = jinheeSrc + '?v=' + Date.now(); }
           }, 3300);
           observer.unobserve(babySection);
         }
       });
     }, { threshold: 0.5 });
-
     observer.observe(babySection);
   }
 
-  // 5. [추가] 갤러리 모달 기능 구현
-  const modal = document.getElementById('galleryModal');
-  const modalImg = document.getElementById('modalTargetImg');
-  const modalClose = document.querySelector('.modal-close');
-  
-  // 모든 갤러리 이미지 클릭 이벤트
-  document.querySelectorAll('.img-box img, .slide-item img').forEach(img => {
-    img.addEventListener('click', (e) => {
-      modal.style.display = 'flex';
-      modalImg.src = e.target.src;
-    });
-  });
-
-  // 닫기 버튼 클릭
-  if (modalClose) {
-    modalClose.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-  }
-
-  // 모달 배경 클릭 시 닫기
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
-
-  // 6. 인트로-베이비 섹션 스크롤 제어
+  // 6. 스크롤 제어 로직 (기존 유지)
   let isScrolling = false;
   window.addEventListener('wheel', (e) => {
     if (isScrolling) return;
@@ -120,40 +131,9 @@ window.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => { isScrolling = false; }, 800);
     }
   }, { passive: false });
-
-  let touchStartY = 0;
-  window.addEventListener('touchstart', (e) => {
-    touchStartY = e.touches[0].clientY;
-  }, { passive: false });
-
-  window.addEventListener('touchend', (e) => {
-    if (isScrolling) return;
-    const intro = document.getElementById('intro');
-    const baby = document.getElementById('baby');
-    if (!intro || !baby) return;
-
-    const touchEndY = e.changedTouches[0].clientY;
-    const diff = touchStartY - touchEndY;
-    const scrollY = window.scrollY;
-    const introHeight = intro.offsetHeight;
-
-    if (diff > 50 && scrollY < introHeight) {
-      isScrolling = true;
-      window.scrollTo({ top: baby.offsetTop, behavior: 'smooth' });
-      setTimeout(() => { isScrolling = false; }, 800);
-    } else if (diff < -50 && scrollY > 0 && scrollY < introHeight) {
-      isScrolling = true;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setTimeout(() => { isScrolling = false; }, 800);
-    }
-  }, { passive: false });
 });
 
-/**
- * [공통 기능 함수]
- */
-
-// 1. 아코디언 드롭다운 토글
+// [공통 기능 함수]
 function toggleAccordion(headerElement) {
   const card = headerElement.parentElement;
   const content = headerElement.nextElementSibling;
@@ -166,18 +146,13 @@ function toggleAccordion(headerElement) {
   }
 }
 
-// 2. 통합 복사 및 토스트 메시지 함수
 function copyAccount(text, message = "복사되었습니다.") {
   navigator.clipboard.writeText(text).then(() => {
     const toast = document.getElementById('toastMessage');
     if (toast) {
-      toast.textContent = message; 
+      toast.textContent = message;
       toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 2000);
+      setTimeout(() => { toast.classList.remove('show'); }, 2000);
     }
-  }).catch(err => {
-    console.error('복사 실패:', err);
   });
 }
