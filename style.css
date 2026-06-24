@@ -118,7 +118,7 @@ body {
 }
 
 #baby{position:relative;background:url('images/baby/bg.jpg') center 14% no-repeat;background-size:cover;overflow:hidden;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges}
-#baby .baby-wrapper{padding-bottom:70%}
+#baby .baby-wrapper{padding-bottom:0;aspect-ratio:100 / 70}
 #baby .baby-wrapper .baby-content{}
 #baby .baby-wrapper .baby-content .twinkle{position:absolute}
 #baby .baby-wrapper .baby-content .twinkle.left{width:23%;left:5px;bottom:10px}
