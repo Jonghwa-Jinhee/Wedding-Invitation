@@ -645,7 +645,7 @@ body {
 
 /* 네컷 감싸는 래퍼 안의 내부 행 구조 마진 및 정렬 보정 */
 .gallery-fourcut-wrapper .four-cut-auto {
-  width: 60% !important;
+  width: 80% !important;
   margin-left: auto !important;
   margin-right: 0 !important;
   height: auto !important; 
