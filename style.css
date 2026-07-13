@@ -421,10 +421,10 @@ body {
 
 /* 폭 제어 유틸리티 */
 .width-100 { width: 100%; }
-.width-70  { width: calc(70% - 2px); }
+.width-70  { width: calc(60% - 2px);height:180px;}
 .width-50  { width: 50%; }
 .width-33  { width: calc(33.33% - 4px); }
-.width-30  { width: calc(30% - 2px); }
+.width-30  { width: calc(40% - 2px); }
 
 /* 원래 높이 구조 완벽 복구 */
 .height-tall { height: 520px; }
@@ -437,7 +437,7 @@ body {
 
 /* 비정형 높이 시스템 */
 .height-xs-wide { height: 185px; }
-.height-xs-wide-lg { height: 180px; }
+.height-xs-wide-lg { height: 220px; }
 
 /* 배치 유틸리티 */
 .margin-v-40 { margin-top: 40px; margin-bottom: 40px; }
