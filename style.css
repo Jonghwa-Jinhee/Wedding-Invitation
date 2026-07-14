@@ -891,3 +891,23 @@ body {
   letter-spacing: 0.8px;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.1); /* 미세한 광택감 */
 }
+
+/* 모달 좌우 버튼 스타일 */
+.modal-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 30px;
+    padding: 15px 10px;
+    cursor: pointer;
+    z-index: 1010;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.modal-nav:active { background: rgba(255, 255, 255, 0.4); }
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
