@@ -47,7 +47,6 @@ body {
   z-index: 2;
 }
 
-/* SVG 이미지 애니메이션 설정 */
 .fade-in-image {
     width: 100%; /* 필요에 따라 조절하세요 */
     opacity: 0;
@@ -69,7 +68,7 @@ body {
 
 .scroll-down {
   position: absolute;
-  bottom: 30px;
+  bottom: 30px; 
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -79,24 +78,24 @@ body {
   cursor: pointer;
   z-index: 10;
   animation: fadeInScroll 1s ease forwards;
-  animation-delay: 2.5s;
+  animation-delay: .5s;
   opacity: 0;
 }
 
 .scroll-down span {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 11px;
+  font-family: 'Cormorant Garamond', serif; 
+  font-size: 11px; 
   font-weight: 300;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #FFFFFF; /* 배경이 어두울 것을 대비해 흰색 계열 추천 */
+  letter-spacing: 2px; 
+  text-transform: uppercase; 
+  color: #555555; 
 }
 
 .scroll-down .arrow {
   font-family: 'Cormorant Garamond', serif;
   font-size: 14px;
-  color: #FFFFFF;
-  animation: floatArrow 1.6s ease-in-out infinite;
+  color: #777777;
+  animation: floatArrow 1.6s ease-in-out infinite; 
 }
 
 #baby{position:relative;background:url('images/baby/bg.jpg') center 14% no-repeat;background-size:cover;overflow:hidden;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges}
@@ -422,10 +421,10 @@ body {
 
 /* 폭 제어 유틸리티 */
 .width-100 { width: 100%; }
-.width-70  { width: calc(60% - 2px);height:180px;}
+.width-70  { width: calc(70% - 2px); }
 .width-50  { width: 50%; }
 .width-33  { width: calc(33.33% - 4px); }
-.width-30  { width: calc(40% - 2px); }
+.width-30  { width: calc(30% - 2px); }
 
 /* 원래 높이 구조 완벽 복구 */
 .height-tall { height: 520px; }
@@ -437,8 +436,8 @@ body {
 .height-wide-main { height: 290px; }   
 
 /* 비정형 높이 시스템 */
-.height-xs-wide { height: 185px; }
-.height-xs-wide-lg { height: 220px; }
+.height-xs-wide { height: 130px; }
+.height-xs-wide-lg { height: 140px; }
 
 /* 배치 유틸리티 */
 .margin-v-40 { margin-top: 40px; margin-bottom: 40px; }
@@ -478,7 +477,7 @@ body {
   height: 380px !important;    
 }
 
-.group-top { padding: 0; gap: 5px; }
+.group-top { padding: 0; gap: 0; }
 
 /* 하단 슬라이더 */
 .gallery-slider-wrapper {
@@ -646,7 +645,7 @@ body {
 
 /* 네컷 감싸는 래퍼 안의 내부 행 구조 마진 및 정렬 보정 */
 .gallery-fourcut-wrapper .four-cut-auto {
-  width: 80% !important;
+  width: 60% !important;
   margin-left: auto !important;
   margin-right: 0 !important;
   height: auto !important; 
@@ -654,7 +653,7 @@ body {
 
 /* 01, 02, 03번 사진 박스 너비를 50% -> 60%로 확장 */
 .gallery-trio-wrapper .flex-row .img-box.width-50 {
-  width: 70% !important;
+  width: 60% !important;
 }
 
 /* ========================================================
