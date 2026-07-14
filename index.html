@@ -384,7 +384,10 @@
 
 	<div id="galleryModal" class="modal-overlay">
 		<span class="modal-close">&times;</span>
-		<img class="modal-content" id="modalTargetImg" alt="확대 이미지">
+		<!-- 줌 기능을 위한 컨테이너 추가 -->
+		<div class="modal-zoom-container">
+			<img class="modal-content" id="modalTargetImg" alt="확대 이미지">
+		</div>
 	</div>
 </body>
 </html>
