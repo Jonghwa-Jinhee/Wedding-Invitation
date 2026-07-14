@@ -5,23 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
     gifImg.src = "images/intro/envelope_motion.gif?v=" + Date.now();
   }
   
-  // 2. Typed.js 실행
-  const typed = new Typed('#typed', {
-    strings: ["We're getting married!"],
-    typeSpeed: 100,    
-    backSpeed: 50,     
-    startDelay: 1200,  
-    loop: false,       
-    showCursor: false, 
-    onBegin: (self) => {
-      const typingTextElement = document.querySelector('.typing-text');
-      if (typingTextElement) {
-        typingTextElement.classList.add('is-visible');
-      }
-    }
-  });
-
-  // 3. 디데이 연산 함수
+  // 2. 디데이 연산 함수
   function calculateDDay() {
     const ddayTarget = document.getElementById('ddayCount');
     if (!ddayTarget) return;
@@ -36,7 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   calculateDDay();
 
-  // 4. [중요] 갤러리 모달 및 스와이프 기능
+  // 3. [중요] 갤러리 모달 및 스와이프 기능
   const modal = document.getElementById('galleryModal');
   const modalImg = document.getElementById('modalTargetImg');
   const modalClose = document.querySelector('.modal-close');
@@ -81,7 +65,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 
-  // 5. Baby 섹션 애니메이션 관리
+  // 4. Baby 섹션 애니메이션 관리
   const babySection = document.getElementById('baby');
   if (babySection) {
     const coupleContainer = babySection.querySelector('.couple-container');
@@ -108,7 +92,7 @@ window.addEventListener('DOMContentLoaded', () => {
     observer.observe(babySection);
   }
 
-  // 6. 스크롤 제어 로직 (기존 유지)
+  // 5. 스크롤 제어 로직 (기존 유지)
   let isScrolling = false;
   window.addEventListener('wheel', (e) => {
     if (isScrolling) return;
