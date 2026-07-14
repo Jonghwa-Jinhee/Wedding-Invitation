@@ -543,7 +543,7 @@ body {
   -webkit-overflow-scrolling: touch;
   padding: 60px 0;
   box-sizing: border-box;
-  touch-action: pan-x pan-y; /* [핵심 추가] 더블 탭 확대 방지 및 핀치 줌 허용 */
+  touch-action: manipulation; /* 핀치 줌은 허용하고, 더블 탭 확대는 막는 설정 */
 }
 
 .modal-content {
@@ -554,9 +554,8 @@ body {
   margin: auto;
   border-radius: 2px;
   animation: zoomInModal 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-  pointer-events: none; /* 이미지를 직접 눌러서 일어나는 브라우저 기본 반응 차단 */
-  -webkit-user-select: none;
-  user-select: none;
+  -ms-touch-action: manipulation; /* 더블 탭 확대 방지 속성 */
+  touch-action: manipulation;
 }
 }
 
