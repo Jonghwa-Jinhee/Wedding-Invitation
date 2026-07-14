@@ -63,20 +63,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	  }
 	});
 
-	// 스와이프 로직 유지
-	let touchStartX = 0;
-	modal.addEventListener('touchstart', (e) => {
-	  touchStartX = e.changedTouches[0].screenX;
-	}, { passive: true });
-
-	modal.addEventListener('touchend', (e) => {
-	  const touchEndX = e.changedTouches[0].screenX;
-	  const diff = touchStartX - touchEndX;
-	  if (Math.abs(diff) > 50) {
-		diff > 0 ? showNext() : showPrev();
-	  }
-	}, { passive: true });
-
   // 4. Baby 섹션 애니메이션 관리
   const babySection = document.getElementById('baby');
   if (babySection) {
