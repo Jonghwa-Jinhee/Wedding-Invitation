@@ -40,30 +40,31 @@ body {
 
 .letter-contents {
   position: absolute;
-  top: 15%;
-  left: 5%;
-  width: 90%;
+  top: 2%;
+  left: 1%;
+  width: 98%;
   text-align: center;
   z-index: 2;
 }
 
-.typing-text {
-  font-family: "Monsieur La Doulaise", cursive;
-  font-weight: 400;
-  font-size: 45px;
-  color: #FFFFFF; 
-  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  letter-spacing: -0.5px;
-  line-height: 1.2;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 1.2s ease-in-out, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+/* SVG 이미지 애니메이션 설정 */
+.fade-in-image {
+    width: 100%; /* 필요에 따라 조절하세요 */
+    opacity: 0;
+    animation: fadeInSlideUp 2s ease-out forwards;
+    animation-delay: 0.5s; /* 페이지 로드 후 0.5초 뒤 시작 */
 }
 
-.typing-text.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+/* 애니메이션 키프레임 */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* 아래에서 20px 위로 */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);    /* 제자리로 */
+    }
 }
 
 .scroll-down {
