@@ -897,17 +897,24 @@ body {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.2);
+    background: transparent; /* 배경 제거 */
     border: none;
-    color: white;
-    font-size: 30px;
-    padding: 15px 10px;
+    color: rgba(255, 255, 255, 0.7); /* 살짝 투명한 흰색으로 고급스럽게 */
+    font-size: 24px; /* 화살표 크기 조절 (기존 30px에서 축소) */
+    padding: 20px; /* 터치 영역은 넓게 유지 */
     cursor: pointer;
     z-index: 1010;
-    border-radius: 5px;
-    transition: background 0.3s;
+    transition: color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent; /* 모바일 터치 하이라이트 제거 */
 }
 
-.modal-nav:active { background: rgba(255, 255, 255, 0.4); }
-.prev-btn { left: 10px; }
-.next-btn { right: 10px; }
+/* 터치 영역이 넓으므로 hover 효과는 은은하게 */
+.modal-nav:active {
+    color: #ffffff; /* 터치 시 더 밝게 */
+}
+
+.prev-btn { left: 0; }
+.next-btn { right: 0; }
