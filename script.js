@@ -21,49 +21,61 @@ window.addEventListener('DOMContentLoaded', () => {
   calculateDDay();
 
   // 3. [중요] 갤러리 모달 및 스와이프 기능
-  const modal = document.getElementById('galleryModal');
-  const modalImg = document.getElementById('modalTargetImg');
-  const modalClose = document.querySelector('.modal-close');
-  
-  // 갤러리 이미지 목록 추출 (모든 이미지 대상)
-  const galleryImages = Array.from(document.querySelectorAll('.img-box img, .slide-item img'));
-  let currentIndex = 0;
+	const modal = document.getElementById('galleryModal');
+	const modalImg = document.getElementById('modalTargetImg');
+	const modalClose = document.querySelector('.modal-close');
+	const prevBtn = document.getElementById('prevBtn');
+	const nextBtn = document.getElementById('nextBtn');
 
-  // 모달 열기 함수
-  const openModal = (index) => {
-    currentIndex = index;
-    modalImg.src = galleryImages[currentIndex].src;
-    modal.style.display = 'flex';
-  };
+	const galleryImages = Array.from(document.querySelectorAll('.img-box img, .slide-item img'));
+	let currentIndex = 0;
 
-  // 이미지 클릭 시 모달 오픈
-  galleryImages.forEach((img, index) => {
-    img.addEventListener('click', () => openModal(index));
-  });
+	const openModal = (index) => {
+	  currentIndex = index;
+	  modalImg.src = galleryImages[currentIndex].src;
+	  modal.style.display = 'flex';
+	};
 
-  // 닫기
-  if (modalClose) modalClose.addEventListener('click', () => modal.style.display = 'none');
-  modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+	// 버튼 로직 추가
+	const showNext = () => {
+	  currentIndex = (currentIndex + 1) % galleryImages.length;
+	  modalImg.src = galleryImages[currentIndex].src;
+	};
 
-  // 스와이프 로직
-  let touchStartX = 0;
-  modal.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
+	const showPrev = () => {
+	  currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+	  modalImg.src = galleryImages[currentIndex].src;
+	};
 
-  modal.addEventListener('touchend', (e) => {
-    const touchEndX = e.changedTouches[0].screenX;
-    const diff = touchStartX - touchEndX;
+	// 이벤트 리스너 등록
+	galleryImages.forEach((img, index) => {
+	  img.addEventListener('click', () => openModal(index));
+	});
 
-    if (Math.abs(diff) > 50) { // 50px 이상 이동 시 스와이프 감지
-      if (diff > 0) { // 왼쪽으로 스와이프 -> 다음 사진
-        currentIndex = (currentIndex + 1) % galleryImages.length;
-      } else { // 오른쪽으로 스와이프 -> 이전 사진
-        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-      }
-      modalImg.src = galleryImages[currentIndex].src;
-    }
-  }, { passive: true });
+	modalClose.addEventListener('click', () => modal.style.display = 'none');
+	nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+	prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+
+	// 배경 클릭 시 닫기
+	modal.addEventListener('click', (e) => { 
+	  if (e.target === modal || e.target.classList.contains('modal-zoom-container')) {
+		modal.style.display = 'none'; 
+	  }
+	});
+
+	// 스와이프 로직 유지
+	let touchStartX = 0;
+	modal.addEventListener('touchstart', (e) => {
+	  touchStartX = e.changedTouches[0].screenX;
+	}, { passive: true });
+
+	modal.addEventListener('touchend', (e) => {
+	  const touchEndX = e.changedTouches[0].screenX;
+	  const diff = touchStartX - touchEndX;
+	  if (Math.abs(diff) > 50) {
+		diff > 0 ? showNext() : showPrev();
+	  }
+	}, { passive: true });
 
   // 4. Baby 섹션 애니메이션 관리
   const babySection = document.getElementById('baby');
